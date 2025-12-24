@@ -25,6 +25,7 @@ typedef struct LIS{
         int mid = (left+right)/2;
         init(left, mid, node*2);
         init(mid+1, right, node*2+1);
+        return 0;
     }
     int add(int index, int nodeLeft, int nodeRight, int node){
         if(index < nodeLeft || nodeRight < index) return rangeLen[node];
@@ -45,15 +46,18 @@ typedef struct LIS{
         if(left <= nodeLeft && nodeRight<=right) return rangeLen[node];
         int mid = (nodeLeft + nodeRight)/2;
         int left_len = query(left, right, nodeLeft, mid, node*2);
-        int right_len = query(left, right, mid+1, right, node*2+1);
+        int right_len = query(left, right, mid+1, nodeRight, node*2+1);
         return max(left_len, right_len);
     }
     int query(int left, int right){
-        return query(left, right, 0, N-1, 1);
+        return query(left, right, 0, n-1, 1);
     }
 }LIS;
 int main(){
     //10,20,30,50
+    cin.tie(0);
+    cout.tie(0);
+    ios_base::sync_with_stdio(false);
     cin >> N;
     for(int i=0;i<N;i++){
         int a;
